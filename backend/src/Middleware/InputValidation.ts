@@ -10,7 +10,7 @@ function validateNoteTitle() {
 function validateNoteContent() {
     return body('content')
         .optional()
-        .isLength({ max: 300 }).withMessage('Note content cannot exceed 300 characters')
+        .isLength({ max: 255 }).withMessage('Note content cannot exceed 255 characters')
         .matches(/^[\w\s.,!?]+$/).withMessage('Note content can only contain normal text and punctuation');
 }
 
@@ -20,7 +20,7 @@ function validateNoteInput() {
         validateNoteTitle(),
         validateNoteContent(),
         handleValidationErrors
-    ];
+        ];
 }
 
 function handleValidationErrors(req: Request, res: Response, next: NextFunction) {

@@ -14,7 +14,7 @@ class NoteService {
         throw createError(404, 'No Notes at the moment');
       }
 
-      return result.recordset.map((record: any) => new Note(record.Id, record.Title, record.Content));
+      return result.recordset.map((record: any) => new Note(record.Id, record.Title, record.Content, record.createdAt, record.updatedAt));
     } catch (error) {
       if (error instanceof createError.HttpError) {
         throw error;
@@ -38,7 +38,7 @@ class NoteService {
       }
 
       const record = result.recordset[0];
-      return new Note(record.Id, record.Title, record.Content);
+      return new Note(record.Id, record.Title, record.Content, record.createdAt, record.updatedAt);
     } catch (error) {
       if (error instanceof createError.HttpError) {
         throw error;
@@ -60,8 +60,12 @@ class NoteService {
         .input('Content', sql.NVarChar(50), content)
         .execute('CreateNote');
 
+      if (!result.recordset || result.recordset.length === 0) {
+        throw new Error('No record returned from the database.');
+      }
+
       const record = result.recordset[0];
-      return new Note(record.Id, record.Title, record.Content);
+      return new Note(record.Id, record.Title, record.Content, record.createdAt, record.updatedAt);
     } catch (error) {
       if (error instanceof createError.HttpError) {
         throw error;
@@ -76,22 +80,29 @@ class NoteService {
   public async updateNote(note: Note): Promise<Note> {
     try {
       const pool = await dbInstance.connect();
-      const existingNote = await pool.request()
+
+      // Check if the note exists
+      const existingNoteResult = await pool.request()
         .input('Id', sql.UniqueIdentifier, note.id)
         .execute('GetNoteById');
 
-      if (!existingNote.recordset[0]) {
+      if (!existingNoteResult.recordset[0]) {
         throw createError(404, 'Note not found');
       }
 
+      // Update the note
       const result = await pool.request()
         .input('Id', sql.UniqueIdentifier, note.id)
         .input('Title', sql.NVarChar(50), note.title)
         .input('Content', sql.NVarChar(50), note.content)
         .execute('UpdateNote');
 
+      if (!result.recordset || result.recordset.length === 0) {
+        throw new Error('No record returned from the database.');
+      }
+
       const record = result.recordset[0];
-      return new Note(record.Id, record.Title, record.Content);
+      return new Note(record.Id, record.Title, record.Content, record.CreatedAt, record.UpdatedAt);
     } catch (error) {
       if (error instanceof createError.HttpError) {
         throw error;
