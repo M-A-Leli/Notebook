@@ -15,21 +15,16 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/v1', routes);
 
-// !
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 // Root page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 // Handle SPA routing, serve index.html for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 // Error handler middleware
