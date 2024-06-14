@@ -1,0 +1,32 @@
+header {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 60px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.logo img {
+  height: 100%;
+  width: auto;
+}
+
+.logo h2 {
+  font-size: 2em;
+  font-weight: bold;
+  background: -webkit-linear-gradient(#1A73E8, #34A853);
+  background: linear-gradient(#1A73E8, #34A853);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

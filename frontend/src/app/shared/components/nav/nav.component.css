@@ -1,0 +1,27 @@
+nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav a {
+  height: 100%;
+  text-decoration: none;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 10px 30px;
+}
+
+nav a {
+  background: transparent;
+  color: #1A73E8;
+}
+
+nav a:hover {
+  background-color: #1A73E8;
+  color: #ffffff;
+}
