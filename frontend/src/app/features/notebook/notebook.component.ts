@@ -11,7 +11,7 @@ enum ViewState {
   SingleNote,
   CreateNote,
   EditNote,
-  DeleteModal
+  // DeleteModal
 }
 
 @Component({
@@ -86,11 +86,13 @@ export class NotebookComponent implements OnInit {
   showDeleteNoteModal(note: Note): void {
     this.selectedNote = note;
     this.selectedNoteId = note.id as string; // Ensure selectedNoteId is set
-    this.viewState = ViewState.DeleteModal;
+    (document.getElementById('delete-note-modal') as HTMLDivElement).style.display = 'block';
+    // this.viewState = ViewState.DeleteModal;
   }
 
   hideDeleteNoteModal(): void {
     this.viewState = ViewState.Default;
+    (document.getElementById('delete-note-modal') as HTMLDivElement).style.display = 'none';
     this.selectedNote = null;
   }
 
