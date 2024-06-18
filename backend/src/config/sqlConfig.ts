@@ -14,27 +14,11 @@ interface Config {
     };
 }
 
-// const development: Config = {
-//     user: process.env.DB_DEV_USER as string,
-//     password: process.env.DB_DEV_PSW as string,
-//     server: process.env.DB_DEV_SERVER as string,
-//     database: process.env.DB_DEV_NAME as string,
-//     pool: {
-//         max: 10,
-//         min: 0,
-//         idleTimeoutMillis: 30000
-//     },
-//     options: {
-//         encrypt: false,
-//         trustServerCertificate: true,
-//     },
-// };
-
 const development: Config = {
-    user: 'sa',
-    password: 'leli2003',
-    server: 'M-A-Leli',
-    database: 'Notebook',
+    user: process.env.DB_DEV_USER as string,
+    password: process.env.DB_DEV_PSW as string,
+    server: process.env.DB_DEV_SERVER as string,
+    database: process.env.DB_DEV_NAME as string,
     pool: {
         max: 10,
         min: 0,

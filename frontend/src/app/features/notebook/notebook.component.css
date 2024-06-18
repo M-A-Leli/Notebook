@@ -292,6 +292,10 @@ main {
   align-items: center;
 }
 
+.modal.show {
+  display: flex;
+}
+
 .modal-container {
   background-color: #ffffff;
   margin: auto;
@@ -362,6 +366,12 @@ main {
   background-color: #0069d9;
 }
 
-#delete-note-modal {
-  display: none;
+.feedback-message {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  text-align: center;
 }
