@@ -2,7 +2,7 @@
 <main>
   <div class="top-bar">
     <a href="/home"><i class="fa-solid fa-house"></i></a>
-    <input type="search" id="search-for-note">
+    <input type="search" id="search-for-note" [(ngModel)]="searchQuery" placeholder="Search notes..." (input)="filterNotes()">
     <button (click)="showCreateNoteContainer()"><i class="fa-solid fa-plus"></i></button>
   </div>
   <div *ngIf="feedbackMessage" class="feedback-message">

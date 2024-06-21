@@ -30,6 +30,8 @@ export class NotebookComponent implements OnInit {
   editNoteForm: FormGroup;
   feedbackMessage: string | null = null;
   ViewState = ViewState; // Expose the enum to the template
+  searchQuery: any;
+  filteredNotes: Note[] = [];
 
   constructor(private noteService: NoteService, private fb: FormBuilder) {
     this.createNoteForm = this.fb.group({
@@ -50,7 +52,15 @@ export class NotebookComponent implements OnInit {
   loadNotes(): void {
     this.noteService.fetchAllNotes().subscribe(notes => {
       this.notes = notes;
+      this.filteredNotes = notes;
     });
+  }
+
+  filterNotes(): void {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredNotes = this.notes.filter(note =>
+      note.title.toLowerCase().includes(query) || note.content.toLowerCase().includes(query)
+    );
   }
 
   viewNote(note: Note): void {
