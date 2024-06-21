@@ -1,6 +1,4 @@
-# Notebook
-
-<img src="frontend/public/logo.svg" alt="Note Icon" width="50" height="50"/>
+# Notebook <img src="frontend/public/logo.svg" alt="Note Icon" width="25" height="25"/>
 
 ### Table of Contents
 
