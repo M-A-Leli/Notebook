@@ -32,6 +32,7 @@ export class NotebookComponent implements OnInit {
   ViewState = ViewState; // Expose the enum to the template
   searchQuery: any;
   filteredNotes: Note[] = [];
+  showDeleteModal: boolean = false;
 
   constructor(private noteService: NoteService, private fb: FormBuilder) {
     this.createNoteForm = this.fb.group({
@@ -95,16 +96,16 @@ export class NotebookComponent implements OnInit {
 
   showDeleteNoteModal(note: Note): void {
     this.selectedNote = note;
-    this.selectedNoteId = note.id as string; // Ensure selectedNoteId is set
-    (document.getElementById('delete-note-modal') as HTMLDivElement).style.display = 'block';
-    // this.viewState = ViewState.DeleteModal;
+    this.selectedNoteId = note.id as string;
+    this.showDeleteModal = true;
   }
 
   hideDeleteNoteModal(): void {
     this.viewState = ViewState.Default;
-    (document.getElementById('delete-note-modal') as HTMLDivElement).style.display = 'none';
+    this.showDeleteModal = false;
     this.selectedNote = null;
   }
+
 
   createNote(): void {
     if (this.createNoteForm.valid) {

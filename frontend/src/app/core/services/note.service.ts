@@ -19,10 +19,6 @@ export class NoteService {
     return this.http.get<Note>(`${this.baseURL}/notes/${id}`);
   }
 
-  fetchNoteProfile(): Observable<Note> {
-    return this.http.get<Note>(`${this.baseURL}/notes/profile`);
-  }
-
   createNote(note: Note): Observable<string> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');

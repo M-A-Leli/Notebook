@@ -3,7 +3,7 @@
   <div class="top-bar">
     <a href="/home"><i class="fa-solid fa-house"></i></a>
     <input type="search" id="search-for-note" [(ngModel)]="searchQuery" placeholder="Search notes..." (input)="filterNotes()">
-    <button (click)="showCreateNoteContainer()"><i class="fa-solid fa-plus"></i></button>
+    <button class="create-note-button" (click)="showCreateNoteContainer()"><i class="fa-solid fa-plus"></i></button>
   </div>
   <div *ngIf="feedbackMessage" class="feedback-message">
     {{ feedbackMessage }}
@@ -17,9 +17,9 @@
           <h3>{{ note.title }}</h3>
         </div>
         <div class="buttons-container">
-          <button class="edit-btn" (click)="onEditClick($event, note)"><i
+          <button class="edit-btn edit-note-button" (click)="onEditClick($event, note)"><i
               class="fa-solid fa-pen-to-square"></i></button>
-          <button class="delete-btn" (click)="onDeleteClick($event, note)"><i class="fa-solid fa-trash"></i></button>
+          <button class="delete-btn delete-note-button" (click)="onDeleteClick($event, note)"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>
     </div>
@@ -42,9 +42,9 @@
             <p>{{ selectedNote?.content }}</p>
           </div>
           <div class="buttons-container">
-            <button class="edit-btn" (click)="showEditNoteContainer(selectedNote!)"><i
+            <button class="edit-note-button edit-btn" (click)="showEditNoteContainer(selectedNote!)"><i
                 class="fa-solid fa-pen-to-square"></i></button>
-            <button class="delete-btn" (click)="showDeleteNoteModal(selectedNote!)"><i
+            <button class="delete-note-button delete-btn" (click)="showDeleteNoteModal(selectedNote!)"><i
                 class="fa-solid fa-trash"></i></button>
           </div>
         </div>
@@ -58,7 +58,7 @@
         <form [formGroup]="createNoteForm" (ngSubmit)="createNote()">
           <div class="input-group">
             <label for="title">Title</label>
-            <input id="title" type="text" formControlName="title" required>
+            <input id="title" type="text" name="title" formControlName="title" required>
           </div>
           <div *ngIf="createNoteForm.get('title')?.invalid && createNoteForm.get('title')?.touched"
             class="error-message">
@@ -66,14 +66,14 @@
           </div>
           <div class="input-group">
             <label for="content">Content</label>
-            <textarea id="content" formControlName="content" required></textarea>
+            <textarea id="content" name="content" formControlName="content" required></textarea>
           </div>
           <div *ngIf="createNoteForm.get('content')?.invalid && createNoteForm.get('content')?.touched"
             class="error-message">
             Content is required.
           </div>
           <div class="input-group">
-            <input type="submit" value="Create" [disabled]="createNoteForm.invalid">
+            <input type="submit" value="Create" [disabled]="createNoteForm.invalid" class="save-note-button">
           </div>
         </form>
       </div>
@@ -85,34 +85,34 @@
         </div>
         <form [formGroup]="editNoteForm" (ngSubmit)="editNote()">
           <div class="input-group">
-            <label for="title">Title</label>
-            <input id="title" type="text" formControlName="title" required>
+            <label for="title2">Title</label>
+            <input id="title" type="text" name="title2" formControlName="title" required>
           </div>
           <div *ngIf="editNoteForm.get('title')?.invalid && editNoteForm.get('title')?.touched" class="error-message">
             Title is required.
           </div>
           <div class="input-group">
-            <label for="content">Content</label>
-            <textarea id="content" formControlName="content" required></textarea>
+            <label for="content2">Content</label>
+            <textarea id="content" name="content2" formControlName="content" required></textarea>
           </div>
           <div *ngIf="editNoteForm.get('content')?.invalid && editNoteForm.get('content')?.touched"
             class="error-message">
             Content is required.
           </div>
           <div class="input-group">
-            <input type="submit" value="Save" [disabled]="editNoteForm.invalid">
+            <input type="submit" value="Save" class="save-note-button" [disabled]="editNoteForm.invalid">
           </div>
         </form>
       </div>
 
-      <!-- <div id="delete-note-modal" class="modal" [ngClass]="{'show': viewState === ViewState.DeleteModal}"> -->
-      <div id="delete-note-modal" class="modal">
+      <div *ngIf="showDeleteModal" id="delete-note-modal" class="modal">
+      <!-- <div id="delete-note-modal" class="modal"> -->
         <div class="modal-container">
           <span class="close-modal" (click)="hideDeleteNoteModal()"><i class="fa-solid fa-circle-xmark"></i></span>
           <p>Confirm deletion of this note!</p>
           <div class="buttons">
-            <button (click)="deleteNote()" class="confirm-action">Confirm</button>
-            <button (click)="hideDeleteNoteModal()" class="cancel-action">Cancel</button>
+            <button (click)="deleteNote()" class="confirm-action delete-note-button">Confirm</button>
+            <button (click)="hideDeleteNoteModal()" class="cancel-action .confirm-delete-button">Cancel</button>
           </div>
         </div>
       </div>
